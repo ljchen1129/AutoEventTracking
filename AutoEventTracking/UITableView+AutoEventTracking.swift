@@ -84,31 +84,6 @@ extension UITableView {
     }
 }
 
-extension UICollectionView {
-    @objc public static func UICollectionViewSwiftLoad() {
-        // 通过 @selector 获得被替换和替换方法的 SEL，作为 Hook:hookClass:fromeSelector:toSelector 的参数传入
-        
-        // hook viewDidAppear 方法
-        let fromSelectorAppear = #selector(setter: self.delegate)
-        let toSelectorAppear = #selector(hook_set(delegate:))
-        Hook.hook(classObject: Self.self, fromSelector: fromSelectorAppear, toSelector: toSelectorAppear)
-    }
-}
-
-/// 代理对象消息转发
-extension UICollectionView {
-    @objc private func hook_set(delegate: UICollectionView) {
-        // 调用原来的方法
-        hook_set(delegate: delegate)
-        // 插入要执行的代码
-        insertToSet(delegate: delegate)
-    }
-    
-    private func insertToSet(delegate: UICollectionView) {
-        
-    }
-}
-
 extension UITableViewCell: TrackViewPropertyType {
     var trackText: String? {
         content(fromView: self)

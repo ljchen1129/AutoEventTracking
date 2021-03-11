@@ -8,7 +8,7 @@
 import Foundation
 
 /// 增加命名空间，防止污染系统或者第三方库的方法
-public struct AETExtension<ExtendedType> {
+public struct Extension<ExtendedType> {
     let type: ExtendedType
 
     init(_ type: ExtendedType) {
@@ -16,30 +16,30 @@ public struct AETExtension<ExtendedType> {
     }
 }
 
-public protocol AETExtended {
+public protocol Extended {
     associatedtype ExtendedType
 
-    static var aet: AETExtension<ExtendedType>.Type { get set }
-    var aet: AETExtension<ExtendedType> { get set }
+    static var aet: Extension<ExtendedType>.Type { get set }
+    var aet: Extension<ExtendedType> { get set }
 }
 
-public extension AETExtended {
-    static var aet: AETExtension<Self>.Type {
-        get { return AETExtension<Self>.self }
+public extension Extended {
+    static var aet: Extension<Self>.Type {
+        get { return Extension<Self>.self }
         set {}
     }
 
-    var aet: AETExtension<Self> {
-        get { return AETExtension(self) }
+    var aet: Extension<Self> {
+        get { return Extension(self) }
         set {}
     }
 }
 
-extension AutoEventTrackingManager: AETExtended {}
-extension TrackEventType: AETExtended {}
-extension Dictionary: AETExtended {}
+extension AutoEventTrackingManager: Extended {}
+extension TrackEventType: Extended {}
+extension Dictionary: Extended {}
 
-extension AETExtension where ExtendedType == Dictionary<String, Any> {
+extension Extension where ExtendedType == Dictionary<String, Any> {
     func jsonString(prettify: Bool = false) -> String? {
         guard JSONSerialization.isValidJSONObject(type) else { return nil }
         let options = (prettify == true) ? JSONSerialization.WritingOptions.prettyPrinted : JSONSerialization.WritingOptions()

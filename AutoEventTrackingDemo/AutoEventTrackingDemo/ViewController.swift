@@ -27,9 +27,16 @@ class ViewController: UIViewController {
     }
     
     @IBAction func `switch`(_ sender: UISwitch) {
+        
     }
     
     @IBAction func slider(_ sender: UISlider) {
+        
+    }
+    
+    @IBAction func collectionViewButtonClick(_ sender: UIButton) {
+        let VC = CollectionViewController(nibName: "CollectionViewController", bundle: nil)
+        navigationController?.pushViewController(VC, animated: true)
     }
 }
 

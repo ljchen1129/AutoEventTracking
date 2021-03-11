@@ -38,6 +38,14 @@
                                     <action selector="slider:" destination="BYZ-38-t0r" eventType="valueChanged" id="Uus-jZ-r9F"/>
                                 </connections>
                             </slider>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TTL-It-oBp">
+                                <rect key="frame" x="50" y="413" width="79" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="collectView"/>
+                                <connections>
+                                    <action selector="collectionViewButtonClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sZs-YU-M7j"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>

@@ -19,7 +19,8 @@
 		5DB01A0425F77AC000E55D26 /* UIView+AutoEventTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB01A0325F77AC000E55D26 /* UIView+AutoEventTracking.swift */; };
 		5DB01A0C25F7993A00E55D26 /* TrackEventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB01A0B25F7993A00E55D26 /* TrackEventType.swift */; };
 		5DB01A3F25F8BC8000E55D26 /* Extended.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB01A3E25F8BC8000E55D26 /* Extended.swift */; };
-		5DB01A4525F9ED2C00E55D26 /* UIScrollView+AutoEventTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB01A4425F9ED2C00E55D26 /* UIScrollView+AutoEventTracking.swift */; };
+		5DB01A4525F9ED2C00E55D26 /* UITableView+AutoEventTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB01A4425F9ED2C00E55D26 /* UITableView+AutoEventTracking.swift */; };
+		5DB01A5325FA1DE300E55D26 /* UICollectionView+AutoEventTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB01A5225FA1DE300E55D26 /* UICollectionView+AutoEventTracking.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,7 +49,8 @@
 		5DB01A0325F77AC000E55D26 /* UIView+AutoEventTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AutoEventTracking.swift"; sourceTree = "<group>"; };
 		5DB01A0B25F7993A00E55D26 /* TrackEventType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackEventType.swift; sourceTree = "<group>"; };
 		5DB01A3E25F8BC8000E55D26 /* Extended.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extended.swift; sourceTree = "<group>"; };
-		5DB01A4425F9ED2C00E55D26 /* UIScrollView+AutoEventTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+AutoEventTracking.swift"; sourceTree = "<group>"; };
+		5DB01A4425F9ED2C00E55D26 /* UITableView+AutoEventTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+AutoEventTracking.swift"; sourceTree = "<group>"; };
+		5DB01A5225FA1DE300E55D26 /* UICollectionView+AutoEventTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+AutoEventTracking.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,7 +99,8 @@
 				5DB01A3E25F8BC8000E55D26 /* Extended.swift */,
 				5DB019F125F7445E00E55D26 /* UIViewController+AutoEventTracking.swift */,
 				5DB01A0325F77AC000E55D26 /* UIView+AutoEventTracking.swift */,
-				5DB01A4425F9ED2C00E55D26 /* UIScrollView+AutoEventTracking.swift */,
+				5DB01A4425F9ED2C00E55D26 /* UITableView+AutoEventTracking.swift */,
+				5DB01A5225FA1DE300E55D26 /* UICollectionView+AutoEventTracking.swift */,
 				5DB019F525F7481800E55D26 /* Hook.swift */,
 				5DB019F925F748EF00E55D26 /* OCClassLoad.h */,
 				5DB019FA25F748EF00E55D26 /* OCClassLoad.m */,
@@ -228,10 +231,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				5DB019FC25F748EF00E55D26 /* OCClassLoad.m in Sources */,
-				5DB01A4525F9ED2C00E55D26 /* UIScrollView+AutoEventTracking.swift in Sources */,
+				5DB01A4525F9ED2C00E55D26 /* UITableView+AutoEventTracking.swift in Sources */,
 				5D813E8C25F5FF3300988DC4 /* AutoEventTrackingManager.swift in Sources */,
 				5DB019F625F7481800E55D26 /* Hook.swift in Sources */,
 				5DB01A0425F77AC000E55D26 /* UIView+AutoEventTracking.swift in Sources */,
+				5DB01A5325FA1DE300E55D26 /* UICollectionView+AutoEventTracking.swift in Sources */,
 				5DB01A0C25F7993A00E55D26 /* TrackEventType.swift in Sources */,
 				5DB01A3F25F8BC8000E55D26 /* Extended.swift in Sources */,
 				5DB019F225F7445E00E55D26 /* UIViewController+AutoEventTracking.swift in Sources */,

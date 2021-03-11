@@ -19,6 +19,8 @@
 		5D813E8925F5FEE600988DC4 /* AutoEventTracking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5D813E8725F5FEE600988DC4 /* AutoEventTracking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5DB01A4C25FA06BA00E55D26 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB01A4A25FA06BA00E55D26 /* TableViewController.swift */; };
 		5DB01A4D25FA06BA00E55D26 /* TableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DB01A4B25FA06BA00E55D26 /* TableViewController.xib */; };
+		5DB01A5C25FA1FDD00E55D26 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB01A5A25FA1FDD00E55D26 /* CollectionViewController.swift */; };
+		5DB01A5D25FA1FDD00E55D26 /* CollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DB01A5B25FA1FDD00E55D26 /* CollectionViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +72,8 @@
 		5D813E8725F5FEE600988DC4 /* AutoEventTracking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AutoEventTracking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DB01A4A25FA06BA00E55D26 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		5DB01A4B25FA06BA00E55D26 /* TableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewController.xib; sourceTree = "<group>"; };
+		5DB01A5A25FA1FDD00E55D26 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
+		5DB01A5B25FA1FDD00E55D26 /* CollectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +132,8 @@
 				5D813E5625F5FD7000988DC4 /* Main.storyboard */,
 				5DB01A4A25FA06BA00E55D26 /* TableViewController.swift */,
 				5DB01A4B25FA06BA00E55D26 /* TableViewController.xib */,
+				5DB01A5A25FA1FDD00E55D26 /* CollectionViewController.swift */,
+				5DB01A5B25FA1FDD00E55D26 /* CollectionViewController.xib */,
 				5D813E5925F5FD7100988DC4 /* Assets.xcassets */,
 				5D813E5B25F5FD7100988DC4 /* LaunchScreen.storyboard */,
 				5D813E5E25F5FD7100988DC4 /* Info.plist */,
@@ -266,6 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D813E5D25F5FD7100988DC4 /* LaunchScreen.storyboard in Resources */,
+				5DB01A5D25FA1FDD00E55D26 /* CollectionViewController.xib in Resources */,
 				5D813E5A25F5FD7100988DC4 /* Assets.xcassets in Resources */,
 				5D813E5825F5FD7000988DC4 /* Main.storyboard in Resources */,
 				5DB01A4D25FA06BA00E55D26 /* TableViewController.xib in Resources */,
@@ -297,6 +304,7 @@
 				5D813E5125F5FD7000988DC4 /* AppDelegate.swift in Sources */,
 				5D813E5325F5FD7000988DC4 /* SceneDelegate.swift in Sources */,
 				5DB01A4C25FA06BA00E55D26 /* TableViewController.swift in Sources */,
+				5DB01A5C25FA1FDD00E55D26 /* CollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
