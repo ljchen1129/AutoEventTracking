@@ -150,7 +150,6 @@ extension AutoEventTrackingManager {
 extension AutoEventTrackingManager {
     public func track(applicationEvent: TrackEventType.Application, properties: [String: Any]? = nil) {
         track(event: TrackEventType.application(applicationEvent), properties: properties)
-
     }
     
     public func track(viewControllerEvent: TrackEventType.ViewController, properties: [String: Any]? = nil) {
@@ -160,8 +159,11 @@ extension AutoEventTrackingManager {
     public func track(viewEvent: TrackEventType.View, properties: [String: Any]? = nil) {
         track(event: TrackEventType.view(viewEvent), properties: properties)
     }
+    
+    public func track(gestureEvent: TrackEventType.Gesture, properties: [String: Any]? = nil) {
+        track(event: TrackEventType.gesture(gestureEvent), properties: properties)
+    }
 }
-
 
 extension Dictionary {
 
