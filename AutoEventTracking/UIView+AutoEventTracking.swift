@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// 各种 UIControl 控件的事件埋点，如 UIButton  Target-action 
 extension UIApplication {
     @objc public static func swiftLoad() {
         // 通过 @selector 获得被替换和替换方法的 SEL，作为 Hook:hookClass:fromeSelector:toSelector 的参数传入

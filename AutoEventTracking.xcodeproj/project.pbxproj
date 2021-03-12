@@ -11,6 +11,7 @@
 		5D813E3525F5FC8600988DC4 /* AutoEventTrackingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D813E3425F5FC8600988DC4 /* AutoEventTrackingTests.swift */; };
 		5D813E3725F5FC8600988DC4 /* AutoEventTracking.h in Headers */ = {isa = PBXBuildFile; fileRef = 5D813E2925F5FC8600988DC4 /* AutoEventTracking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5D813E8C25F5FF3300988DC4 /* AutoEventTrackingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D813E8B25F5FF3300988DC4 /* AutoEventTrackingManager.swift */; };
+		5D8AEFF225FB6E5D001D1A10 /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8AEFF125FB6E5D001D1A10 /* KeyChain.swift */; };
 		5DB019F225F7445E00E55D26 /* UIViewController+AutoEventTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB019F125F7445E00E55D26 /* UIViewController+AutoEventTracking.swift */; };
 		5DB019F625F7481800E55D26 /* Hook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB019F525F7481800E55D26 /* Hook.swift */; };
 		5DB019FB25F748EF00E55D26 /* OCClassLoad.h in Headers */ = {isa = PBXBuildFile; fileRef = 5DB019F925F748EF00E55D26 /* OCClassLoad.h */; };
@@ -42,6 +43,7 @@
 		5D813E3425F5FC8600988DC4 /* AutoEventTrackingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoEventTrackingTests.swift; sourceTree = "<group>"; };
 		5D813E3625F5FC8600988DC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5D813E8B25F5FF3300988DC4 /* AutoEventTrackingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoEventTrackingManager.swift; sourceTree = "<group>"; };
+		5D8AEFF125FB6E5D001D1A10 /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		5DB019F125F7445E00E55D26 /* UIViewController+AutoEventTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+AutoEventTracking.swift"; sourceTree = "<group>"; };
 		5DB019F525F7481800E55D26 /* Hook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hook.swift; sourceTree = "<group>"; };
 		5DB019F925F748EF00E55D26 /* OCClassLoad.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCClassLoad.h; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 			children = (
 				5D813E2925F5FC8600988DC4 /* AutoEventTracking.h */,
 				5D813E8B25F5FF3300988DC4 /* AutoEventTrackingManager.swift */,
+				5D8AEFF125FB6E5D001D1A10 /* KeyChain.swift */,
 				5DB01A0B25F7993A00E55D26 /* TrackEventType.swift */,
 				5DB01A3E25F8BC8000E55D26 /* Extended.swift */,
 				5DB019F125F7445E00E55D26 /* UIViewController+AutoEventTracking.swift */,
@@ -238,6 +241,7 @@
 				5D813E8C25F5FF3300988DC4 /* AutoEventTrackingManager.swift in Sources */,
 				5DB019F625F7481800E55D26 /* Hook.swift in Sources */,
 				5DB01A0425F77AC000E55D26 /* UIView+AutoEventTracking.swift in Sources */,
+				5D8AEFF225FB6E5D001D1A10 /* KeyChain.swift in Sources */,
 				5DB01A6325FA2A4700E55D26 /* UIGestureRecognizer+AutoEventTracking.swift in Sources */,
 				5DB01A5325FA1DE300E55D26 /* UICollectionView+AutoEventTracking.swift in Sources */,
 				5DB01A0C25F7993A00E55D26 /* TrackEventType.swift in Sources */,

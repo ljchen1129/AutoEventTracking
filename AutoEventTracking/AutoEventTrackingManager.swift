@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AdSupport
 
 public protocol AutoEventTrackingConfigable {
     var propertiesKeyFlag: String { get }
@@ -20,6 +21,8 @@ extension AutoEventTrackingConfigable {
 public class AutoEventTrackingManager: NSObject, AutoEventTrackingConfigable {
     public static let shared = AutoEventTrackingManager()
     private let viewControllerBlackListFileName = "viewControllerBlackList"
+    private let loginIdKey = "loginId"
+    private let anonymousIdKey = "anonymousId"
     
     /// 公共属性部分，默认采集
     public var commonProperties: [String: Any] = [:]
@@ -33,11 +36,26 @@ public class AutoEventTrackingManager: NSObject, AutoEventTrackingConfigable {
     
     /// 标识 app 是被后台模式启动的
     private var isAppStartBackground = false
+    
+    private var keyChain = Keychain()
+    
+    /// 用户登录后，用来标识用户
+    public var loginId: String? {
+        didSet {
+            UserDefaults.standard.setValue(loginId, forKey: loginIdKey)
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    /// 用户未登录前标识用户的 ID
+    private var anonymousId: String?
 
     private override init() {
         super.init()
         self.commonProperties = defalutProperties
         self.isAppStartBackground = UIApplication.shared.backgroundTimeRemaining != UIApplication.backgroundFetchIntervalNever
+        loginId = UserDefaults.standard.string(forKey: loginIdKey)
+        anonymousId = getAnonymousId()
         
         // 加载控制器埋点黑名单
         loadViewControllerBlackList()
@@ -109,7 +127,7 @@ extension AutoEventTrackingManager {
     @objc private func didFinishLaunchingNotification() {
         // App 在后台运行
         if isAppStartBackground {
-            track(applicationEvent: TrackEventType.Application.start(isBackground: true))
+            track(applicationEvent: TrackEventType.Application.start(isBackground: true), properties: ["\(propertiesKeyFlag)App_state": "Background"])
         }
     }
 }
@@ -126,9 +144,7 @@ extension AutoEventTrackingManager {
             eventProperties.merge(tempProperties, uniquingKeysWith: { $1 })
         }
         
-        if isAppStartBackground {
-            eventInfo["\(propertiesKeyFlag)App_state"] = "Background"
-        }
+        eventInfo["user_id"] = loginId ?? anonymousId
         
         eventInfo["properties"] = eventProperties
         
@@ -144,6 +160,47 @@ extension AutoEventTrackingManager {
         let result = event.aet.jsonString(prettify: true) ?? ""
         print("\n---------------- ✨✨✨✨✨ 全埋点采集成功 ✨✨✨✨✨ ------------ \n\(result)\n---------------- ✨✨✨✨✨ 全埋点采集成功 ✨✨✨✨✨ ------------ \n")
         #endif
+    }
+    
+    private func save(anonymousId: String) {
+        UserDefaults.standard.setValue(anonymousId, forKey: anonymousIdKey)
+        UserDefaults.standard.synchronize()
+        
+        // 保存到 keyChain
+        keyChain[anonymousIdKey] = anonymousId
+    }
+    
+    private func getAnonymousId() -> String {
+        if let wrapAnonymousId = anonymousId {
+            return wrapAnonymousId
+        }
+        
+        if let wrapAnonymousId = UserDefaults.standard.string(forKey: anonymousIdKey) {
+            return wrapAnonymousId
+        }
+        
+        // keyChain
+        if let wrapAnonymousId = keyChain[anonymousIdKey] {
+            return wrapAnonymousId
+        }
+        
+        // IDFA > IDFV > UUID
+        let idfa = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+        if idfa.count > 0  {
+            save(anonymousId: idfa)
+            return idfa
+        }
+        
+        let idfv = UIDevice.current.identifierForVendor?.uuidString
+        if let wrapIdfv = idfv {
+            save(anonymousId: wrapIdfv)
+            return wrapIdfv
+        }
+        
+        // 保存起来
+        save(anonymousId: UUID().uuidString)
+        
+        return UUID().uuidString
     }
 }
 
@@ -163,8 +220,4 @@ extension AutoEventTrackingManager {
     public func track(gestureEvent: TrackEventType.Gesture, properties: [String: Any]? = nil) {
         track(event: TrackEventType.gesture(gestureEvent), properties: properties)
     }
-}
-
-extension Dictionary {
-
 }

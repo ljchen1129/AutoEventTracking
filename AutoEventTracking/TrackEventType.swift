@@ -7,7 +7,7 @@
 
 import UIKit
 
-/// 埋点事件类型
+/// 所有埋点事件类型
 public enum TrackEventType {
     /// 应用程序
     public enum Application {

@@ -9,6 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// Swift 没有 load 方法，使用 Objective-C 类来做中转
 @interface OCClassLoad : NSObject
 
 @end

@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// 控制器 UIViewController 埋点事件
 extension UIViewController {
     @objc public static func swiftLoad() {
         // 通过 @selector 获得被替换和替换方法的 SEL，作为 Hook:hookClass:fromeSelector:toSelector 的参数传入
