@@ -139,3 +139,5 @@ extension UIStepper: TrackViewPropertyType {
         "\(value)"
     }
 }
+
+extension UIImageView: TrackViewPropertyType {}

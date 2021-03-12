@@ -17,6 +17,7 @@
         [UIApplication UIApplicationSwiftLoad];
         [UITableView UITableViewSwiftLoad];
         [UICollectionView UICollectionViewSwiftLoad];
+        [UIGestureRecognizer UIGestureRecognizerSwiftLoad];
     });
 }
 

@@ -9,11 +9,22 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var tapGestureLabel: UILabel!
+    @IBOutlet weak var longPressGestureLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
         navigationItem.title = "我是控制器标题"
+        
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapGesture(_:)))
+        tapGestureLabel.addGestureRecognizer(tapGesture)
+        
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressGesture(_:)))
+        longPressGestureLabel.addGestureRecognizer(longPressGesture)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -38,5 +49,16 @@ class ViewController: UIViewController {
         let VC = CollectionViewController(nibName: "CollectionViewController", bundle: nil)
         navigationController?.pushViewController(VC, animated: true)
     }
+    
+     @objc func tapGesture(_ sender: UITapGestureRecognizer) {
+        print("tapGesture")
+        
+    }
+    
+    @objc func longPressGesture(_ sender: UILongPressGestureRecognizer) {
+       print("longPressGesture")
+       
+   }
+    
 }
 
