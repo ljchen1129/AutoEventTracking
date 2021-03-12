@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AutoEventTracking
 
 class ViewController: UIViewController {
 
@@ -39,7 +40,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction func `switch`(_ sender: UISwitch) {
-        
+        if sender.isOn {
+            AutoEventTrackingManager.shared.loginId = "12345678"
+        } else {
+            AutoEventTrackingManager.shared.loginId = nil
+        }
     }
     
     @IBAction func slider(_ sender: UISlider) {

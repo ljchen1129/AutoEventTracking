@@ -7,6 +7,9 @@
 
 import UIKit
 import AdSupport
+#if swift(>=5)
+import AppTrackingTransparency //适配iOS14
+#endif
 
 public protocol AutoEventTrackingConfigable {
     var propertiesKeyFlag: String { get }
@@ -186,7 +189,15 @@ extension AutoEventTrackingManager {
         
         // IDFA > IDFV > UUID
         let idfa = ASIdentifierManager.shared().advertisingIdentifier.uuidString
-        if idfa.count > 0  {
+        var isLimitAdTracking = true
+        
+        if #available(iOS 14, *) {
+            isLimitAdTracking = ATTrackingManager.trackingAuthorizationStatus ==  .authorized
+        } else {
+            isLimitAdTracking = ASIdentifierManager.shared().isAdvertisingTrackingEnabled
+        }
+        
+        if idfa.count > 0, isLimitAdTracking {
             save(anonymousId: idfa)
             return idfa
         }
