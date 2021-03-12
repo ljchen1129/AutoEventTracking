@@ -22,7 +22,8 @@ class ViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapGesture(_:)))
         tapGestureLabel.addGestureRecognizer(tapGesture)
         
-        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressGesture(_:)))
+        let longPressGesture = UILongPressGestureRecognizer()
+        longPressGesture.addTarget(self, action: #selector(longPressGesture(_:)))
         longPressGestureLabel.addGestureRecognizer(longPressGesture)
         
     }

@@ -13,11 +13,11 @@
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        [UIViewController UIViewControllerSwiftLoad];
-        [UIApplication UIApplicationSwiftLoad];
-        [UITableView UITableViewSwiftLoad];
-        [UICollectionView UICollectionViewSwiftLoad];
-        [UIGestureRecognizer UIGestureRecognizerSwiftLoad];
+        [UIViewController swiftLoad];
+        [UIApplication swiftLoad];
+        [UITableView swiftLoad];
+        [UICollectionView swiftLoad];
+        [UIGestureRecognizer swiftLoad];
     });
 }
 

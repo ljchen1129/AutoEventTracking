@@ -10,7 +10,7 @@ import UIKit
 
 extension UIGestureRecognizer {
     
-    @objc public static func UIGestureRecognizerSwiftLoad() {
+    @objc public static func swiftLoad() {
         // 通过 @selector 获得被替换和替换方法的 SEL，作为 Hook:hookClass:fromeSelector:toSelector 的参数传入
         
         // hook init(target:action:) 方法
@@ -45,6 +45,7 @@ extension UIGestureRecognizer {
     private func insertToInit(target: Any?, action: Selector?) {
         // 添加
         if let wrapTarget = target, let wrapAction = action {
+            // 实际上会执行 hook_addTarget 方法
             addTarget(wrapTarget, action: wrapAction)
         }
     }
