@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5D813E5125F5FD7000988DC4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D813E5025F5FD7000988DC4 /* AppDelegate.swift */; };
-		5D813E5325F5FD7000988DC4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D813E5225F5FD7000988DC4 /* SceneDelegate.swift */; };
 		5D813E5525F5FD7000988DC4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D813E5425F5FD7000988DC4 /* ViewController.swift */; };
 		5D813E5825F5FD7000988DC4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D813E5625F5FD7000988DC4 /* Main.storyboard */; };
 		5D813E5A25F5FD7100988DC4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D813E5925F5FD7100988DC4 /* Assets.xcassets */; };
@@ -57,7 +56,6 @@
 /* Begin PBXFileReference section */
 		5D813E4D25F5FD7000988DC4 /* AutoEventTrackingDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoEventTrackingDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D813E5025F5FD7000988DC4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5D813E5225F5FD7000988DC4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		5D813E5425F5FD7000988DC4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		5D813E5725F5FD7000988DC4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5D813E5925F5FD7100988DC4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -127,7 +125,6 @@
 			isa = PBXGroup;
 			children = (
 				5D813E5025F5FD7000988DC4 /* AppDelegate.swift */,
-				5D813E5225F5FD7000988DC4 /* SceneDelegate.swift */,
 				5D813E5425F5FD7000988DC4 /* ViewController.swift */,
 				5D813E5625F5FD7000988DC4 /* Main.storyboard */,
 				5DB01A4A25FA06BA00E55D26 /* TableViewController.swift */,
@@ -302,7 +299,6 @@
 			files = (
 				5D813E5525F5FD7000988DC4 /* ViewController.swift in Sources */,
 				5D813E5125F5FD7000988DC4 /* AppDelegate.swift in Sources */,
-				5D813E5325F5FD7000988DC4 /* SceneDelegate.swift in Sources */,
 				5DB01A4C25FA06BA00E55D26 /* TableViewController.swift in Sources */,
 				5DB01A5C25FA1FDD00E55D26 /* CollectionViewController.swift in Sources */,
 			);
@@ -482,6 +478,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = AutoEventTrackingDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -500,6 +497,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = AutoEventTrackingDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
