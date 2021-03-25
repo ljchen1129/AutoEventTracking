@@ -75,9 +75,9 @@ extension UIGestureRecognizer {
         
         // 区分不同的手势事件
         if !((sender as? UITapGestureRecognizer) == .some(nil)) {
-            AutoEventTrackingManager.shared.track(gestureEvent: TrackEventType.Gesture.tap, properties: properties)
+            AutoEventTrackingManager.shared.track(gesture: TrackEventType.Gesture.tap, properties: properties)
         } else if !((sender as? UILongPressGestureRecognizer) == .some(nil)) {
-            AutoEventTrackingManager.shared.track(gestureEvent: TrackEventType.Gesture.longPress, properties: properties)
+            AutoEventTrackingManager.shared.track(gesture: TrackEventType.Gesture.longPress, properties: properties)
         }
     }
 }

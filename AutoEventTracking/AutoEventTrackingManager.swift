@@ -7,9 +7,9 @@
 
 import UIKit
 import AdSupport
-#if swift(>=5)
-import AppTrackingTransparency //适配iOS14
-#endif
+//#if swift(>=5)
+//import AppTrackingTransparency //适配iOS14
+//#endif
 
 public protocol AutoEventTrackingConfigable {
     var propertiesKeyFlag: String { get }
@@ -108,7 +108,7 @@ extension AutoEventTrackingManager {
         // 还原标识位
         isAppWillResignActive = false
         
-        track(applicationEvent: TrackEventType.Application.end)
+        track(application: TrackEventType.Application.end)
     }
     
     @objc private func willResignActiveNotification() {
@@ -124,13 +124,13 @@ extension AutoEventTrackingManager {
         
         // 还原
         isAppStartBackground = false
-        track(applicationEvent: TrackEventType.Application.start(isBackground: false))
+        track(application: TrackEventType.Application.start(isBackground: false))
     }
     
     @objc private func didFinishLaunchingNotification() {
         // App 在后台运行
         if isAppStartBackground {
-            track(applicationEvent: TrackEventType.Application.start(isBackground: true), properties: ["\(propertiesKeyFlag)App_state": "Background"])
+            track(application: TrackEventType.Application.start(isBackground: true), properties: ["\(propertiesKeyFlag)App_state": "Background"])
         }
     }
 }
@@ -188,19 +188,19 @@ extension AutoEventTrackingManager {
         }
         
         // IDFA > IDFV > UUID
-        let idfa = ASIdentifierManager.shared().advertisingIdentifier.uuidString
-        var isLimitAdTracking = true
-        
-        if #available(iOS 14, *) {
-            isLimitAdTracking = ATTrackingManager.trackingAuthorizationStatus ==  .authorized
-        } else {
-            isLimitAdTracking = ASIdentifierManager.shared().isAdvertisingTrackingEnabled
-        }
-        
-        if idfa.count > 0, isLimitAdTracking {
-            save(anonymousId: idfa)
-            return idfa
-        }
+//        let idfa = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+//        var isLimitAdTracking = true
+//        
+//        if #available(iOS 14, *) {
+//            isLimitAdTracking = ATTrackingManager.trackingAuthorizationStatus ==  .authorized
+//        } else {
+//            isLimitAdTracking = ASIdentifierManager.shared().isAdvertisingTrackingEnabled
+//        }
+//        
+//        if idfa.count > 0, isLimitAdTracking {
+//            save(anonymousId: idfa)
+//            return idfa
+//        }
         
         let idfv = UIDevice.current.identifierForVendor?.uuidString
         if let wrapIdfv = idfv {
@@ -216,19 +216,19 @@ extension AutoEventTrackingManager {
 }
 
 extension AutoEventTrackingManager {
-    public func track(applicationEvent: TrackEventType.Application, properties: [String: Any]? = nil) {
-        track(event: TrackEventType.application(applicationEvent), properties: properties)
+    public func track(application event: TrackEventType.Application, properties: [String: Any]? = nil) {
+        track(event: TrackEventType.application(event), properties: properties)
     }
     
-    public func track(viewControllerEvent: TrackEventType.ViewController, properties: [String: Any]? = nil) {
-        track(event: TrackEventType.viewController(viewControllerEvent), properties: properties)
+    public func track(viewController event: TrackEventType.ViewController, properties: [String: Any]? = nil) {
+        track(event: TrackEventType.viewController(event), properties: properties)
     }
     
-    public func track(viewEvent: TrackEventType.View, properties: [String: Any]? = nil) {
-        track(event: TrackEventType.view(viewEvent), properties: properties)
+    public func track(view event: TrackEventType.View, properties: [String: Any]? = nil) {
+        track(event: TrackEventType.view(event), properties: properties)
     }
     
-    public func track(gestureEvent: TrackEventType.Gesture, properties: [String: Any]? = nil) {
-        track(event: TrackEventType.gesture(gestureEvent), properties: properties)
+    public func track(gesture event: TrackEventType.Gesture, properties: [String: Any]? = nil) {
+        track(event: TrackEventType.gesture(event), properties: properties)
     }
 }

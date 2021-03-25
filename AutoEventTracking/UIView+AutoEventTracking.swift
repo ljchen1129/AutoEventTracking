@@ -50,7 +50,7 @@ extension UIApplication {
                 properties["\(AutoEventTrackingManager.shared.propertiesKeyFlag)ViewControllerTitle"] = trackViewControllerTitle
             }
             
-            AutoEventTrackingManager.shared.track(viewEvent: sender.event, properties: properties)
+            AutoEventTrackingManager.shared.track(view: sender.event, properties: properties)
         }
     }
 }

@@ -61,7 +61,7 @@ extension UIViewController {
         }
         
         // 页面曝光
-        AutoEventTrackingManager.shared.track(viewControllerEvent: TrackEventType.ViewController.expose, properties: properties)
+        AutoEventTrackingManager.shared.track(viewController: TrackEventType.ViewController.expose, properties: properties)
     }
     
     private func insertToViewWillDisappear() {

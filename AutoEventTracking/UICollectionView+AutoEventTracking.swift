@@ -81,7 +81,7 @@ extension UICollectionView {
             properties["\(AutoEventTrackingManager.shared.propertiesKeyFlag)ViewControllerTitle"] = trackViewControllerTitle
         }
         
-        AutoEventTrackingManager.shared.track(viewEvent: TrackEventType.View.didSelect(view: nil, indexPath: nil), properties: properties)
+        AutoEventTrackingManager.shared.track(view: TrackEventType.View.didSelect(view: nil, indexPath: nil), properties: properties)
     }
 }
 
