@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5D7569F6260C729500E694E2 /* H5ResourceCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7569F2260C729500E694E2 /* H5ResourceCache.swift */; };
+		5D7569F7260C729500E694E2 /* DiskFileCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7569F3260C729500E694E2 /* DiskFileCache.swift */; };
+		5D7569F8260C729500E694E2 /* MemeryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7569F4260C729500E694E2 /* MemeryCache.swift */; };
+		5D7569F9260C729500E694E2 /* CacheProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7569F5260C729500E694E2 /* CacheProtocol.swift */; };
 		5D813E3025F5FC8600988DC4 /* AutoEventTracking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D813E2625F5FC8600988DC4 /* AutoEventTracking.framework */; };
 		5D813E3525F5FC8600988DC4 /* AutoEventTrackingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D813E3425F5FC8600988DC4 /* AutoEventTrackingTests.swift */; };
 		5D813E3725F5FC8600988DC4 /* AutoEventTracking.h in Headers */ = {isa = PBXBuildFile; fileRef = 5D813E2925F5FC8600988DC4 /* AutoEventTracking.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -36,6 +40,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5D7569F2260C729500E694E2 /* H5ResourceCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = H5ResourceCache.swift; sourceTree = "<group>"; };
+		5D7569F3260C729500E694E2 /* DiskFileCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiskFileCache.swift; sourceTree = "<group>"; };
+		5D7569F4260C729500E694E2 /* MemeryCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeryCache.swift; sourceTree = "<group>"; };
+		5D7569F5260C729500E694E2 /* CacheProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheProtocol.swift; sourceTree = "<group>"; };
 		5D813E2625F5FC8600988DC4 /* AutoEventTracking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AutoEventTracking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D813E2925F5FC8600988DC4 /* AutoEventTracking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AutoEventTracking.h; sourceTree = "<group>"; };
 		5D813E2A25F5FC8600988DC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -76,6 +84,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5D7569F1260C726100E694E2 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				5D7569F5260C729500E694E2 /* CacheProtocol.swift */,
+				5D7569F3260C729500E694E2 /* DiskFileCache.swift */,
+				5D7569F2260C729500E694E2 /* H5ResourceCache.swift */,
+				5D7569F4260C729500E694E2 /* MemeryCache.swift */,
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
 		5D813E1C25F5FC8600988DC4 = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +116,7 @@
 		5D813E2825F5FC8600988DC4 /* AutoEventTracking */ = {
 			isa = PBXGroup;
 			children = (
+				5D7569F1260C726100E694E2 /* Cache */,
 				5D813E2925F5FC8600988DC4 /* AutoEventTracking.h */,
 				5D813E8B25F5FF3300988DC4 /* AutoEventTrackingManager.swift */,
 				5D8AEFF125FB6E5D001D1A10 /* KeyChain.swift */,
@@ -237,11 +257,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				5DB019FC25F748EF00E55D26 /* OCClassLoad.m in Sources */,
+				5D7569F6260C729500E694E2 /* H5ResourceCache.swift in Sources */,
 				5DB01A4525F9ED2C00E55D26 /* UITableView+AutoEventTracking.swift in Sources */,
 				5D813E8C25F5FF3300988DC4 /* AutoEventTrackingManager.swift in Sources */,
 				5DB019F625F7481800E55D26 /* Hook.swift in Sources */,
+				5D7569F8260C729500E694E2 /* MemeryCache.swift in Sources */,
 				5DB01A0425F77AC000E55D26 /* UIView+AutoEventTracking.swift in Sources */,
 				5D8AEFF225FB6E5D001D1A10 /* KeyChain.swift in Sources */,
+				5D7569F7260C729500E694E2 /* DiskFileCache.swift in Sources */,
+				5D7569F9260C729500E694E2 /* CacheProtocol.swift in Sources */,
 				5DB01A6325FA2A4700E55D26 /* UIGestureRecognizer+AutoEventTracking.swift in Sources */,
 				5DB01A5325FA1DE300E55D26 /* UICollectionView+AutoEventTracking.swift in Sources */,
 				5DB01A0C25F7993A00E55D26 /* TrackEventType.swift in Sources */,

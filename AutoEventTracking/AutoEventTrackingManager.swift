@@ -190,13 +190,13 @@ extension AutoEventTrackingManager {
         // IDFA > IDFV > UUID
 //        let idfa = ASIdentifierManager.shared().advertisingIdentifier.uuidString
 //        var isLimitAdTracking = true
-//        
+//
 //        if #available(iOS 14, *) {
 //            isLimitAdTracking = ATTrackingManager.trackingAuthorizationStatus ==  .authorized
 //        } else {
 //            isLimitAdTracking = ASIdentifierManager.shared().isAdvertisingTrackingEnabled
 //        }
-//        
+//
 //        if idfa.count > 0, isLimitAdTracking {
 //            save(anonymousId: idfa)
 //            return idfa
