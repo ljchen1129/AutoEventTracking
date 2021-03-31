@@ -118,7 +118,10 @@ extension AutoEventTrackingManager {
         // 还原标识位
         isAppWillResignActive = false
         
-        track(application: TrackEventType.Application.end)
+//        track(application: TrackEventType.Application.end)
+        
+        // 触发 AppEnd 事件
+        trackTimerEnd(event:  TrackEventType.application(.end))
         
         // 暂停所有事件的时长统计
         trackTimer.forEach { (event, eventTimer) in
@@ -155,6 +158,9 @@ extension AutoEventTrackingManager {
         
         // 移除所有保存的暂停统计时长事件
         enterBackgroundTimerEvents.removeAll()
+        
+        // 开始 AppEnd 事件计时
+        trackTimerStart(event:  TrackEventType.application(.end))
     }
     
     @objc private func didFinishLaunchingNotification() {
