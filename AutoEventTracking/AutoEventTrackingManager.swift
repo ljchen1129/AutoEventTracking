@@ -37,6 +37,8 @@ public class AutoEventTrackingManager: NSObject, AutoEventTrackingConfigable {
     public var viewControllerBlackList = Set<String>()
     /// 控制是否在 DEBUG 模式下打印日志
     public var isPrintDubugLog = true
+    /// 配置事件存储策略
+    private var eventStorePolicy = EventStorePolicy()
     
     /// 标识 app 是否收到即将失去激活的通知
     private var isAppWillResignActive = false
@@ -46,7 +48,7 @@ public class AutoEventTrackingManager: NSObject, AutoEventTrackingConfigable {
     
     private var keyChain = Keychain()
     
-    // 保存需要统计时间相关的事件
+    /// 保存需要统计时间相关的事件
     private var trackTimer = [TrackEventType: [String: Any]]()
     
     /// 记录进入后台的还未暂停的事件，进入后台不应该算入事件时长
@@ -63,7 +65,12 @@ public class AutoEventTrackingManager: NSObject, AutoEventTrackingConfigable {
     /// 用户未登录前标识用户的 ID
     private var anonymousId: String?
 
+    /// 文件存储
+    private var fileStore: FileStore
+    
     private override init() {
+        fileStore = FileStore(policy: eventStorePolicy)
+        
         super.init()
         self.commonProperties = defalutProperties
         self.isAppStartBackground = UIApplication.shared.backgroundTimeRemaining != UIApplication.backgroundFetchIntervalNever
@@ -188,6 +195,8 @@ extension AutoEventTrackingManager {
         eventInfo["properties"] = eventProperties
         
         printEvent(eventInfo)
+        // 保存到文件缓存
+        fileStore.save(event: eventInfo)
     }
     
     private func printEvent(_ event: [String: Any]) {
