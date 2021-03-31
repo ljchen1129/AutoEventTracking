@@ -61,13 +61,22 @@ extension UIViewController {
         }
         
         // 页面曝光
-        AutoEventTrackingManager.shared.track(viewController: TrackEventType.ViewController.expose, properties: properties)
+//        AutoEventTrackingManager.shared.track(viewController: TrackEventType.ViewController.expose(self), properties: properties)
+        AutoEventTrackingManager.shared.trackTimerStart(event: TrackEventType.viewController(.expose(self)))
     }
     
     private func insertToViewWillDisappear() {
-        // TODO: 页面消失事件埋点上报
+        // 页面消失事件埋点上报
+        var properties: [String: Any] = [
+            "\(AutoEventTrackingManager.shared.propertiesKeyFlag)page_Name": NSStringFromClass(Self.self)
+        ]
         
+        if let title = trackTitle {
+            properties["\(AutoEventTrackingManager.shared.propertiesKeyFlag)page_Title"] = title
+        }
         
+        // 页面曝光事件上报
+        AutoEventTrackingManager.shared.trackTimerEnd(event: TrackEventType.viewController(.expose(self)), properties: properties)
     }
     
     private func shouldTrack() -> Bool {

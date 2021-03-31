@@ -24,7 +24,7 @@ public enum TrackEventType: Hashable {
     /// 控制器，页面
     public enum ViewController {
         /// 曝光
-        case expose
+        case expose(UIViewController)
     }
     
     public enum View {
@@ -95,6 +95,13 @@ extension TrackEventType.ViewController: Hashable {
         switch self {
         case .expose:
             return "\(flagString)ViewControllerExpose"
+        }
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        switch self {
+        case let .expose(vc):
+            vc.hash(into: &hasher)
         }
     }
 }
