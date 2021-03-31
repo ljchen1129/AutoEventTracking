@@ -46,7 +46,11 @@ public class AutoEventTrackingManager: NSObject, AutoEventTrackingConfigable {
     
     private var keyChain = Keychain()
     
-    private var trackTimer = [String: [String: Any]]()
+    // 保存需要统计时间相关的事件
+    private var trackTimer = [TrackEventType: [String: Any]]()
+    
+    /// 记录进入后台的还未暂停的事件，进入后台不应该算入事件时长
+    private var enterBackgroundTimerEvents: [TrackEventType] = []
     
     /// 用户登录后，用来标识用户
     private var loginId: String? {
@@ -115,6 +119,18 @@ extension AutoEventTrackingManager {
         isAppWillResignActive = false
         
         track(application: TrackEventType.Application.end)
+        
+        // 暂停所有事件的时长统计
+        trackTimer.forEach { (event, eventTimer) in
+            // 是否暂停
+            let isPuased = eventTimer[eventPauseKey] as? Bool ?? false
+            if !isPuased {
+                // 如果没有暂停，记录起来
+                enterBackgroundTimerEvents.append(event)
+                // 给设置暂停
+                trackTimerPause(event: event)
+            }
+        }
     }
     
     @objc private func willResignActiveNotification() {
@@ -131,6 +147,14 @@ extension AutoEventTrackingManager {
         // 还原
         isAppStartBackground = false
         track(application: TrackEventType.Application.start(isBackground: false))
+        
+        // 恢复所有事件的时长统计
+        enterBackgroundTimerEvents.forEach { (event) in
+            trackTimerResume(event: event)
+        }
+        
+        // 移除所有保存的暂停统计时长事件
+        enterBackgroundTimerEvents.removeAll()
     }
     
     @objc private func didFinishLaunchingNotification() {
@@ -247,18 +271,18 @@ extension AutoEventTrackingManager {
 extension AutoEventTrackingManager {
     public func trackTimerStart(event: TrackEventType) {
         // 记录开始时间，采集开机时间，系统启动时间
-        trackTimer[event.name] = [
+        trackTimer[event] = [
             eventBeginKey: ProcessInfo.processInfo.systemUptime * 1000
         ]
     }
     
     public func trackTimerEnd(event: TrackEventType, properties: [String: Any]? = nil) {
-        guard let eventTimer = trackTimer[event.name] else {
+        guard let eventTimer = trackTimer[event] else {
             track(event: event, properties: properties)
             return
         }
         
-        trackTimer[event.name] = nil
+        trackTimer[event] = nil
         
         var newProperties: [String: Any] = properties ?? [:]
         
@@ -280,10 +304,14 @@ extension AutoEventTrackingManager {
     }
     
     public func trackTimerPause(event: TrackEventType) {
-        // 事件不存在，或者已经暂停，直接返回
-        guard var eventTimer = trackTimer[event.name],
-              eventTimer[eventPauseKey] as? Bool == .some(true) else {
+        // 事件不存在，返回
+        guard var eventTimer = trackTimer[event] else {
             return
+        }
+        
+        // 事件已经暂停，直接返回
+        if eventTimer[eventPauseKey] as? Bool == .some(true) {
+          return
         }
         
         // 保存暂停前统计的时长
@@ -296,12 +324,12 @@ extension AutoEventTrackingManager {
         // 设置暂停标志
         eventTimer[eventPauseKey] = true
         
-        trackTimer[event.name] = eventTimer
+        trackTimer[event] = eventTimer
     }
     
     public func trackTimerResume(event: TrackEventType) {
-        // 事件不存在，或者已经暂停，直接返回
-        guard var eventTimer = trackTimer[event.name],
+        // 事件不存在，或者没有统计暂停，直接返回
+        guard var eventTimer = trackTimer[event],
               eventTimer[eventPauseKey] as? Bool == .some(true) else {
             return
         }
@@ -312,6 +340,6 @@ extension AutoEventTrackingManager {
         // 重置暂停标志
         eventTimer[eventPauseKey] = false
         
-        trackTimer[event.name] = eventTimer
+        trackTimer[event] = eventTimer
     }
 }

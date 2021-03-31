@@ -8,7 +8,11 @@
 import UIKit
 
 /// 所有埋点事件类型
-public enum TrackEventType {
+public enum TrackEventType: Hashable {
+    public static func == (lhs: TrackEventType, rhs: TrackEventType) -> Bool {
+        return lhs.name == rhs.name
+    }
+    
     /// 应用程序
     public enum Application {
         /// 启动，是否是用户主动启动还是，系统后台系统
@@ -71,7 +75,7 @@ extension TrackEventType {
     }
 }
 
-extension TrackEventType.Application {
+extension TrackEventType.Application: Hashable {
     var name: String {
         let flagString = AutoEventTrackingManager.shared.propertiesKeyFlag
         
@@ -84,7 +88,7 @@ extension TrackEventType.Application {
     }
 }
 
-extension TrackEventType.ViewController {
+extension TrackEventType.ViewController: Hashable {
     var name: String {
         let flagString = AutoEventTrackingManager.shared.propertiesKeyFlag
         
@@ -95,7 +99,7 @@ extension TrackEventType.ViewController {
     }
 }
 
-extension TrackEventType.View {
+extension TrackEventType.View: Hashable {
     var name: String {
         let flagString = AutoEventTrackingManager.shared.propertiesKeyFlag
         
@@ -112,7 +116,7 @@ extension TrackEventType.View {
     }
 }
 
-extension TrackEventType.Gesture {
+extension TrackEventType.Gesture: Hashable {
     var name: String {
         let flagString = AutoEventTrackingManager.shared.propertiesKeyFlag
         
@@ -125,7 +129,7 @@ extension TrackEventType.Gesture {
     }
 }
 
-extension TrackEventType.Exception {
+extension TrackEventType.Exception: Hashable {
     var name: String {
         let flagString = AutoEventTrackingManager.shared.propertiesKeyFlag
         
