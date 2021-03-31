@@ -23,9 +23,13 @@ extension AutoEventTrackingConfigable {
 
 public class AutoEventTrackingManager: NSObject, AutoEventTrackingConfigable {
     public static let shared = AutoEventTrackingManager()
+    
     private let viewControllerBlackListFileName = "viewControllerBlackList"
     private let loginIdKey = "loginId"
     private let anonymousIdKey = "anonymousId"
+    private let eventBeginKey = "eventBegin"
+    private let eventPauseKey = "eventPause"
+    private let eventDurationKey = "eventDuration"
     
     /// 公共属性部分，默认采集
     public var commonProperties: [String: Any] = [:]
@@ -42,8 +46,10 @@ public class AutoEventTrackingManager: NSObject, AutoEventTrackingConfigable {
     
     private var keyChain = Keychain()
     
+    private var trackTimer = [String: [String: Any]]()
+    
     /// 用户登录后，用来标识用户
-    public var loginId: String? {
+    private var loginId: String? {
         didSet {
             UserDefaults.standard.setValue(loginId, forKey: loginIdKey)
             UserDefaults.standard.synchronize()
@@ -230,5 +236,82 @@ extension AutoEventTrackingManager {
     
     public func track(gesture event: TrackEventType.Gesture, properties: [String: Any]? = nil) {
         track(event: TrackEventType.gesture(event), properties: properties)
+    }
+    
+    public func login(withLoginID id: String?) {
+        loginId = id
+    }
+}
+
+// MARK: - Timer
+extension AutoEventTrackingManager {
+    public func trackTimerStart(event: TrackEventType) {
+        // 记录开始时间，采集开机时间，系统启动时间
+        trackTimer[event.name] = [
+            eventBeginKey: ProcessInfo.processInfo.systemUptime * 1000
+        ]
+    }
+    
+    public func trackTimerEnd(event: TrackEventType, properties: [String: Any]? = nil) {
+        guard let eventTimer = trackTimer[event.name] else {
+            track(event: event, properties: properties)
+            return
+        }
+        
+        trackTimer[event.name] = nil
+        
+        var newProperties: [String: Any] = properties ?? [:]
+        
+        // 判断事件是否处于暂停状态
+        let isPaused = eventTimer[eventPauseKey] as? Bool ?? false
+        // 取出暂停时保存的事件时长
+        let eventDuration = eventTimer[eventDurationKey] as? Double ?? 0
+        if isPaused {
+            newProperties["\(propertiesKeyFlag)event_duration"] = eventDuration
+        } else {
+            // 开始时间
+            let beginTime = eventTimer[eventBeginKey] as? Double ?? 0
+            let durationTime = ProcessInfo.processInfo.systemUptime * 1000 - beginTime + eventDuration
+            newProperties["\(propertiesKeyFlag)event_duration"] = durationTime
+        }
+        
+        // 上报数据
+        track(event: event, properties: newProperties)
+    }
+    
+    public func trackTimerPause(event: TrackEventType) {
+        // 事件不存在，或者已经暂停，直接返回
+        guard var eventTimer = trackTimer[event.name],
+              eventTimer[eventPauseKey] as? Bool == .some(true) else {
+            return
+        }
+        
+        // 保存暂停前统计的时长
+        let eventBegin = eventTimer[eventBeginKey] as? Double ?? 0
+        // 现在的系统时间 - 开始保存的 + 已经持续的
+        let eventDuration = ProcessInfo.processInfo.systemUptime * 1000 - eventBegin + (eventTimer[eventDurationKey] as? Double ?? 0)
+        // 重新保存持续事件持续时长
+        eventTimer[eventDurationKey] = eventDuration
+        
+        // 设置暂停标志
+        eventTimer[eventPauseKey] = true
+        
+        trackTimer[event.name] = eventTimer
+    }
+    
+    public func trackTimerResume(event: TrackEventType) {
+        // 事件不存在，或者已经暂停，直接返回
+        guard var eventTimer = trackTimer[event.name],
+              eventTimer[eventPauseKey] as? Bool == .some(true) else {
+            return
+        }
+        
+        // 重置开始时间
+        eventTimer[eventBeginKey] = ProcessInfo.processInfo.systemUptime * 1000
+        
+        // 重置暂停标志
+        eventTimer[eventPauseKey] = false
+        
+        trackTimer[event.name] = eventTimer
     }
 }

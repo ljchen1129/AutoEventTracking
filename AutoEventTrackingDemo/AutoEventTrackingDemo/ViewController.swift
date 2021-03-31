@@ -26,7 +26,6 @@ class ViewController: UIViewController {
         let longPressGesture = UILongPressGestureRecognizer()
         longPressGesture.addTarget(self, action: #selector(longPressGesture(_:)))
         longPressGestureLabel.addGestureRecognizer(longPressGesture)
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -41,9 +40,9 @@ class ViewController: UIViewController {
     
     @IBAction func `switch`(_ sender: UISwitch) {
         if sender.isOn {
-            AutoEventTrackingManager.shared.loginId = "12345678"
+            AutoEventTrackingManager.shared.login(withLoginID: "123456789")
         } else {
-            AutoEventTrackingManager.shared.loginId = nil
+            AutoEventTrackingManager.shared.login(withLoginID: nil)
         }
     }
     
@@ -66,5 +65,12 @@ class ViewController: UIViewController {
        
    }
     
+    @IBAction func startButtonClick(_ sender: UIButton) {
+        AutoEventTrackingManager.shared.trackTimerStart(event: TrackEventType.view(TrackEventType.View.click))
+    }
+    
+    @IBAction func endButtonClick(_ sender: UIButton) {
+        AutoEventTrackingManager.shared.trackTimerEnd(event: TrackEventType.view(TrackEventType.View.click))
+    }
 }
 
