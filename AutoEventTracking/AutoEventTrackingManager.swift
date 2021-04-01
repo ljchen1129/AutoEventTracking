@@ -22,7 +22,7 @@ extension AutoEventTrackingConfigable {
 }
 
 public class AutoEventTrackingManager: NSObject, AutoEventTrackingConfigable {
-    public static let shared = AutoEventTrackingManager()
+    public static var shared: AutoEventTrackingManager!
     
     private let viewControllerBlackListFileName = "viewControllerBlackList"
     private let loginIdKey = "loginId"
@@ -67,11 +67,27 @@ public class AutoEventTrackingManager: NSObject, AutoEventTrackingConfigable {
 
     /// 文件存储
     private var fileStore: FileStore
+    /// 事件同步
+    private var eventSync: EventSync
     
-    private override init() {
+//    convenience init(serverUrl: String) {
+//        self.eventSync = EventSync(serverUrl: serverUrl)
+//        self.init()
+//    }
+    
+    static func start(withServerUrl url: String) {
+        shared = AutoEventTrackingManager(serverUrl: url)
+    }
+    
+    static func sharedInstance() -> AutoEventTrackingManager {
+        return shared
+    }
+    
+    private init(serverUrl: String) {
+        self.eventSync = EventSync(serverUrl: serverUrl)
         fileStore = FileStore(policy: eventStorePolicy)
-        
         super.init()
+        
         self.commonProperties = defalutProperties
         self.isAppStartBackground = UIApplication.shared.backgroundTimeRemaining != UIApplication.backgroundFetchIntervalNever
         loginId = UserDefaults.standard.string(forKey: loginIdKey)
