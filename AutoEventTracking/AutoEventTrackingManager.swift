@@ -21,8 +21,8 @@ extension AutoEventTrackingConfigable {
     }
 }
 
-public class AutoEventTrackingManager: NSObject, AutoEventTrackingConfigable {
-    public static var shared: AutoEventTrackingManager!
+public class AutoEventTrackingManager: AutoEventTrackingConfigable {
+    public static let shared = AutoEventTrackingManager()
     
     private let viewControllerBlackListFileName = "viewControllerBlackList"
     private let loginIdKey = "loginId"
@@ -70,23 +70,10 @@ public class AutoEventTrackingManager: NSObject, AutoEventTrackingConfigable {
     /// 事件同步
     private var eventSync: EventSync
     
-//    convenience init(serverUrl: String) {
-//        self.eventSync = EventSync(serverUrl: serverUrl)
-//        self.init()
-//    }
-    
-    static func start(withServerUrl url: String) {
-        shared = AutoEventTrackingManager(serverUrl: url)
-    }
-    
-    static func sharedInstance() -> AutoEventTrackingManager {
-        return shared
-    }
-    
-    private init(serverUrl: String) {
-        self.eventSync = EventSync(serverUrl: serverUrl)
+    private init() {
+        self.eventSync = EventSync(serverUrl: "")
+        
         fileStore = FileStore(policy: eventStorePolicy)
-        super.init()
         
         self.commonProperties = defalutProperties
         self.isAppStartBackground = UIApplication.shared.backgroundTimeRemaining != UIApplication.backgroundFetchIntervalNever
@@ -97,6 +84,9 @@ public class AutoEventTrackingManager: NSObject, AutoEventTrackingConfigable {
         loadViewControllerBlackList()
         
         setupListeners()
+        
+        // 异常上报
+        let _ = ExceptionHandler.shared
     }
     
     deinit {
@@ -291,6 +281,10 @@ extension AutoEventTrackingManager {
     
     public func track(gesture event: TrackEventType.Gesture, properties: [String: Any]? = nil) {
         track(event: TrackEventType.gesture(event), properties: properties)
+    }
+    
+    public func track(exception event: TrackEventType.Exception, properties: [String: Any]? = nil) {
+        track(event: TrackEventType.exception(event), properties: event.properties)
     }
     
     public func login(withLoginID id: String?) {

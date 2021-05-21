@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// 增加命名空间，防止污染系统或者第三方库的方法
+/// 增加命名空间，防止污染系统或者第三方库的变量和方法
 public struct Extension<ExtendedType> {
     let type: ExtendedType
 

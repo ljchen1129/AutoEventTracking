@@ -79,6 +79,14 @@
                                     <action selector="endButtonClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zJH-6P-YZj"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OXP-YN-9IQ">
+                                <rect key="frame" x="56" y="792" width="67" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="exception"/>
+                                <connections>
+                                    <action selector="exceptionButtonClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="khD-TM-5ww"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>

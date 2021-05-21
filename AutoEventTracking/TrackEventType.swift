@@ -48,7 +48,22 @@ public enum TrackEventType: Hashable {
     
     /// 异常
     public enum Exception {
-         
+        case exception(NSException)
+        /// Unix 信号异常
+        case Unix
+        
+        var properties: [String: Any] {
+            switch self {
+            case .exception(let exception):
+                let info = "Exception name: \(exception.name)" + "\n" +
+                    "Exception reason: \(String(describing: exception.reason))" + "\n" +
+                    "Exception stack: \(exception.callStackSymbols)"
+                return ["app_crashed_reason" : info]
+                
+            case .Unix:
+                return [:]
+            }
+        }
     }
     
     case application(Application)
@@ -141,8 +156,10 @@ extension TrackEventType.Exception: Hashable {
         let flagString = AutoEventTrackingManager.shared.propertiesKeyFlag
         
         switch self {
-        default:
-            return "\(flagString)"
+        case .exception:
+            return "\(flagString)Exception"
+        case .Unix:
+            return "\(flagString)Unix Signal"
         }
     }
 }

@@ -72,5 +72,10 @@ class ViewController: UIViewController {
     @IBAction func endButtonClick(_ sender: UIButton) {
         AutoEventTrackingManager.shared.trackTimerEnd(event: TrackEventType.view(TrackEventType.View.click))
     }
+    
+    @IBAction func exceptionButtonClick(_ sender: Any) {
+        let array = NSArray(arrayLiteral: 1, 2)
+        print(array[2])
+    }
 }
 
